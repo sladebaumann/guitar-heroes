@@ -1,0 +1,39 @@
+<section class="row" data-ng-controller="ViewProfileController">
+    <h2 class="col-md-12 text-center">View your profile</h2>
+    <hr>
+
+    <h3 class="col-md-12 text-center">User information</h3>
+    <div class="col-sm-6 col-sm-offset-3">
+        <table class="table table-hover">
+            <tbody>
+            <tr>
+                <th>First name</th>
+                <td data-ng-bind="user.firstName"></td>
+            </tr>
+            <tr>
+                <th>Last name</th>
+                <td data-ng-bind="user.lastName"></td>
+            </tr>
+            <tr>
+                <th>Email address</th>
+                <td data-ng-bind="user.email"></td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td data-ng-bind="user.username"></td>
+            </tr>
+            </tbody>
+        </table>
+        <h3 class="text-center">Saved Guitars</h3>
+
+        <div class="list">
+            <a class="list-group-item" ng-repeat="guitar in guitars" ng-click="select(guitar)" href="/#!/creator/{{guitar._id}}">
+                <h4>{{guitar.name}}</h4>
+                <img ng-src="{{guitar.head.img}}">
+                <img ng-src="{{guitar.neck.img}}">
+                <img ng-src="{{guitar.body.img}}">
+            </a>
+        </div>
+
+    </div>
+</section>

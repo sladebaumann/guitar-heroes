@@ -1,0 +1,145 @@
+<section>
+    <link rel="stylesheet" href="/css/creator.css">
+    <div class="page-header">
+        <h1>Guitar Creator</h1>
+    </div>
+
+    <div class="col-sm-8 col-md-8 col-lg-8">
+        <div class="well">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="BrandDropDownMenu"
+                        data-toggle="dropdown"
+                        aria-expanded="true">
+                    {{ active.brand || 'Brand' }}
+                    <span class="caret"></span>
+                </button>
+
+                <button class="btn btn-default" ng-click="setBrand('')"><span
+                        class="glyphicon glyphicon-remove"></span> Reset filter
+                </button>
+
+                <button type="button" class="btn btn-default" aria-label="Left Align"
+                        ng-click="saveGuitar()">
+                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Save
+                </button>
+
+                <button type="button" class="btn btn-default" aria-label="Left Align"
+                        ng-click="orderGuitar()">
+                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Order
+                </button>
+
+                <br>
+
+                <ul id="brandDropDown" class="dropdown-menu" role="menu"
+                    aria-labelledby="brandDropDown">
+                    <li role="presentation"><a role="menuitem" tabindex="-1"
+                                               ng-repeat="brand in brands"
+                                               ng-click="setBrand(brand)">{{brand}}</a></li>
+                </ul>
+            </div>
+            <form class="form-inline" ng-submit="setName(guitarName)">
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="guitarName"
+                           placeholder="Name your guitar...">
+                </div>
+                <button type="submit" class="btn btn-default">Name it!</button>
+            </form>
+        </div>
+
+        <!-- SAVE SUCCESS DIV -->
+        <div class="alert alert-success alert-dismissible" role="alert" ng-show="save.success">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                    ng-click="save.success=false">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+            <strong>Guitar saved!</strong> Your guitar now safely resides in our database.
+        </div>
+
+        <!-- SAVE ERROR DIV -->
+        <div class="alert alert-danger alert-dismissible" role="alert" ng-show="save.error">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                    ng-click="save.error=false">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+            <strong>Warning!</strong> {{ save.errorMessage }}
+        </div>
+        <div class="well col-xs-6">
+            <p><strong>Name: {{ active.name }}</strong></p>
+
+            <p>Head: {{active.head.brand}} {{active.head.range}}</p>
+
+            <p>Neck: {{active.neck.brand}} {{active.neck.range}}</p>
+
+            <p>Body: {{active.body.brand}} {{active.body.range}}</p>
+
+        </div>
+
+        <!-- GUITAR PREVIEW AREA -->
+        <div class="col-xs-6">
+            <table class="table table-hover">
+                <tbody>
+                <tr>
+                    <td class="text-center">
+                        <img ng-show="active.head" ng-src="{{active.head.img}}">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        <img ng-show="active.neck" ng-src="{{active.neck.img}}">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        <img ng-show="active.body" ng-src="{{active.body.img}}">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- PARTS SELECTION AREA -->
+    <div id="partsColumn" class="col-sm-4 col-md-4 col-lg-4">
+        <ul class="nav nav-pills">
+            <li ng-class="{active: active.tab === 'heads'}" ng-click="setTab('heads')"><a>Heads</a>
+            </li>
+            <li ng-class="{active: active.tab === 'necks'}" ng-click="setTab('necks')"><a>Necks</a>
+            </li>
+            <li ng-class="{active: active.tab === 'bodies'}" ng-click="setTab('bodies')">
+                <a>Bodies</a></li>
+        </ul>
+        <div id="heads" ng-show="active.tab ==='heads'">
+            <div class="list">
+                <a class="list-group-item" ng-repeat="part in parts.heads" ng-click="select(part)"
+                   ng-show="!active.brand || active.brand === part.brand">
+                    <h4>{{part.brand}}
+                        <small>{{part.range}}</small>
+                    </h4>
+                    <img ng-src="{{part.img}}">
+                </a>
+            </div>
+        </div>
+
+        <div id="necks" ng-show="active.tab ==='necks'">
+            <div class="list">
+                <a class="list-group-item" ng-repeat="part in parts.necks" ng-click="select(part)"
+                   ng-show="!active.brand || active.brand === part.brand">
+                    <h4>{{part.brand}}
+                        <small>{{part.range}}</small>
+                    </h4>
+                    <img ng-src="{{part.img}}">
+                </a>
+            </div>
+        </div>
+
+        <div id="bodies" ng-show="active.tab ==='bodies'">
+            <div class="list">
+                <a class="list-group-item" ng-repeat="part in parts.bodies" ng-click="select(part)"
+                   ng-show="!active.brand || active.brand === part.brand">
+                    <h4>{{part.brand}}
+                        <small>{{part.range}}</small>
+                    </h4>
+                    <img ng-src="{{part.img}}">
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,449 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Guitar-Heroes",
+    "version": "1.0.0"
+  },
+  "host": "guitarheroes.herokuapp.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/guitars": {
+      "get": {
+        "summary": "Guitars",
+        "description": "The guitars endpoint returns all guitars in the proper display order.\n",
+        "tags": [
+          "Guitars"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Guitar"
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Guitars",
+        "description": "Add a new guitar\n",
+        "tags": [
+          "Guitars"
+        ],
+        "responses": {
+          "405": {
+            "description": "invalid parts",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Guitar"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/guitars/:guitarId": {
+      "get": {
+        "summary": "Guitar by ID",
+        "description": "The Guitar(guitarID) endpoint returns a guitar with the corresponding id.\n",
+        "parameters": [
+          {
+            "name": "guitarId",
+            "in": "query",
+            "description": "Id of a guitar",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "tags": [
+          "Guitars"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Guitar"
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update Guitar",
+        "description": "The Guitar(guitarID) endpoint updates guitar with corresponding ID\n",
+        "parameters": [
+          {
+            "name": "guitarId",
+            "in": "query",
+            "description": "Id of a guitar",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "tags": [
+          "Guitars"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Guitar"
+              }
+            }
+          },
+          "403": {
+            "description": "invalid credentials",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Guitar",
+        "description": "The Guitar(guitarID) endpoint deletes guitar with corresponding ID\n",
+        "parameters": [
+          {
+            "name": "guitarId",
+            "in": "query",
+            "description": "Id of a guitar",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "tags": [
+          "Guitars"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Guitar"
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized transaction",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/guitars/creator/:creatorId": {
+      "get": {
+        "summary": "Guitar by CreatorId",
+        "description": "The Guitar(guitarID) endpoint returns a guitar with the corresponding id.",
+        "parameters": [
+          {
+            "name": "creatorId",
+            "in": "query",
+            "description": "Id of creator.",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "tags": [
+          "Creator",
+          "Guitars"
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of guitars",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Guitar"
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/parts": {
+      "get": {
+        "summary": "Parts",
+        "description": "The guitars endpoint returns all parts in the proper display order.\n",
+        "tags": [
+          "Parts"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Parts"
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/parts/:type": {
+      "get": {
+        "summary": "Parts by type",
+        "description": "The parts by type endpoint returns a list of parts of the corresponding type.",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "type of part",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "tags": [
+          "Creator",
+          "Parts"
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of parts",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Parts"
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/parts/:partId": {
+      "get": {
+        "summary": "Part by ID",
+        "description": "The part(partId) endpoint returns a guitar with the corresponding id.\n",
+        "parameters": [
+          {
+            "name": "partId",
+            "in": "query",
+            "description": "Id of a part",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "tags": [
+          "Parts"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Parts"
+              }
+            }
+          },
+          "500": {
+            "description": "Part not found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update part by ID",
+        "description": "The part(partId) endpoint updates a part with the corresponding id.\n",
+        "parameters": [
+          {
+            "name": "partId",
+            "in": "query",
+            "description": "Id of a part",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "tags": [
+          "Parts"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Parts"
+              }
+            }
+          },
+          "403": {
+            "description": "invalid credentials",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Part by ID",
+        "description": "The part(partID) endpoint deletes part with corresponding ID\n",
+        "parameters": [
+          {
+            "name": "partId",
+            "in": "query",
+            "description": "Id of a part",
+            "required": true,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "tags": [
+          "Parts"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Parts"
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized transaction",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Guitar": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": "Unique identifier representing a specific guitar."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the guitar that is stored."
+        },
+        "head": {
+          "type": "string",
+          "description": "Unique identifier of guitar head."
+        },
+        "neck": {
+          "type": "string",
+          "description": "Unique identifier of guitar neck."
+        },
+        "body": {
+          "type": "string",
+          "description": "Unique identifier of guitar body."
+        },
+        "creator": {
+          "type": "string",
+          "description": "Unique identifier of guitar creator session."
+        }
+      }
+    },
+    "Parts": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": "Unique identifier representing a specific part."
+        },
+        "type": {
+          "type": "string",
+          "description": "The name of the type of guitar part."
+        },
+        "range": {
+          "type": "string",
+          "description": "The model name of the guitar that the part comes from (Stratocaster, Telecaster, etc)."
+        },
+        "brand": {
+          "type": "string",
+          "description": "The brand name of the guitar part."
+        },
+        "img": {
+          "type": "string",
+          "description": "The path of the image of the part (img/parts/dean-custom/head.png)."
+        }
+      }
+    },
+    "Error": {
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

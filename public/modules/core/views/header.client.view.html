@@ -1,0 +1,50 @@
+<div class="container" data-ng-controller="HeaderController">
+    <div class="navbar-header">
+        <a href="/#!/" id="brand" class="navbar-brand">Harmonix</a>
+        <ul class="nav navbar-nav">
+            <li ui-route="/creator" ng-class="{active: $uiRoute}">
+                <a href="/#!/creator">Guitar Creator</a>
+            </li>
+            <li ui-route="/about" ng-class="{active: $uiRoute}">
+                <a href="/#!/about">About</a>
+            </li>
+            <li ui-route="/contact" ng-class="{active: $uiRoute}">
+                <a href="/#!/contact">Contact</a>
+            </li>
+        </ul>
+    </div>
+    <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
+        <ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">
+            <li ui-route="/signup" ng-class="{active: $uiRoute}">
+                <a href="/#!/signup">Sign Up</a>
+            </li>
+            <li class="divider-vertical"></li>
+            <li id="signin" ui-route="/signin" ng-class="{active: $uiRoute}">
+                <a href="/#!/signin{{ currentPage }}">Sign In</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <span data-ng-bind="authentication.user.displayName"></span> <b
+                        class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li ui-route="/view-profile" ng-class="{active: $uiRoute}">
+                        <a href="/#!/profile">View Profile</a>
+                    </li>
+                    <li ui-route="/edit-profile" ng-class="{active: $uiRoute}">
+						<a href="/#!/settings/profile">Edit Profile</a>
+					</li>
+					<li ui-route="/password" ng-class="{active: $uiRoute}" data-ng-show="authentication.user.provider === 'local'">
+						<a href="/#!/settings/password">Change Password</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="/auth/signout">Signout</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+</div>

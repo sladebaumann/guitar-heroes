@@ -1,0 +1,40 @@
+<section data-ng-controller="ContactController">
+    <div class="well col-sm-6">
+        <h1>{{test || 'Contact'}}</h1>
+
+        <div class="alert alert-danger" ng-show="error">
+            <button class="close" data-dismiss="alert">x</button>
+            <strong>Error!</strong> An error occured while trying to send message.
+        </div>
+        <div class="alert alert-success" ng-show="success">
+            <button class="close" data-dismiss="alert">x</button>
+            <strong>Success! </strong> <p> We thank you for contacting us. A representative will respond to your question as soon as possible. </p>
+
+        </div>
+        <form role="form" name="contactForm" ng-submit="submit()">
+            <div class="form-group" ng-class="{error: contactForm.name.$invalid}">
+                <label>Please enter your Full Name</label>
+                <input class="form-control" type="text" name="name" ng-model="user.name" required="required" placeholder="Your name">
+                <span class="help-block" ng-show="contactForm.name.$error.required">Required</span>
+            </div>
+            <div class="form-group" ng-class="{error: contactForm.email.$invalid}">
+                <label>Please enter your Email address</label>
+                <input class="form-control" type="email" name="email" ng-model="user.email" required="required" placeholder="Your email address">
+                <span class="help-block" ng-show="contactForm.email.$error.required">Required</span>
+                <span class="help-block" ng-show="contactForm.email.$error.email">Invalid email address</span>
+            </div>
+            <div class="form-group" ng-class="{error: contactForm.message.$invalid}">
+                <label>Please enter your question or comment:</label>
+                <textarea class="form-control" rows="5" name="message" ng-model="user.body" required="required" placeholder="Your messsage"></textarea>
+                <span class="help-inline" ng-show="contactForm.message.$error.required">Required</span>
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" ng-disabled="contactForm.$invalid">Send</button>
+        </form>
+    </div>
+    <div class="col-sm-6">
+        <iframe width="100%" height="450" frameborder="0" style="border:0"
+                src="https://www.google.com/maps/embed/v1/place?q=Harmonix+Music+Systems+Inc,+Massachusetts+Avenue,+Cambridge,+MA,+United+States&key=AIzaSyABn7kHmjvbF_7Ehnt7ERYTH4qV3gsfTwk"></iframe>        <h4>Harmonix address:</h4>
+
+        <p>Harmonix<br>625 Massachusetts Ave # 2<br>Cambridge, MA 02139<br>United States</p>
+    </div>
+</section>
